@@ -17,15 +17,14 @@ public class FilterInvoiceStubbedTest {
         QueryInvoicesDAO dao = new QueryInvoicesDAO(db);
         FilterInvoice filter = new FilterInvoice(db, dao);
 
-        //
+        // Create stubs
         Invoice i0 = new Invoice("Sam", 25);
         Invoice i1 = new Invoice("Sam", 50);
         Invoice i2 = new Invoice("Sam", 125);
+        List<Invoice> invoices = Arrays.asList(i0, i1, i2);
 
         // Save invoices to DAO
-        dao.save(i0);
-        dao.save(i1);
-        dao.save(i2);
+        when(dao.all()).thenReturn(invoices);
 
         // Apply filter to lowValueInvoices
         List<Invoice> lowValueInvoices = filter.lowValueInvoices();
