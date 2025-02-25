@@ -17,7 +17,7 @@ public class FilterInvoiceTest {
         Database db = new Database();
 
         // Initialize filter
-        FilterInvoice filter = new FilterInvoice(db, dao);
+        FilterInvoice filter = new FilterInvoice(dao);
 
         // Apply filter to lowValueInvoices
         List<Invoice> lowValueInvoices = filter.lowValueInvoices();

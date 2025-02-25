@@ -14,8 +14,8 @@ public class FilterInvoiceStubbedTest {
     public void filterInvoiceStubbedTest(){
         // Initialize database, DAO, and filter
         Database db = new Database();
-        QueryInvoicesDAO dao = new QueryInvoicesDAO(db);
-        FilterInvoice filter = new FilterInvoice(db, dao);
+        QueryInvoicesDAO dao = mock(QueryInvoicesDAO.class);
+        FilterInvoice filter = new FilterInvoice(dao);
 
         // Create stubs
         Invoice i0 = new Invoice("Sam", 25);
@@ -26,8 +26,10 @@ public class FilterInvoiceStubbedTest {
         // Save invoices to DAO
         when(dao.all()).thenReturn(invoices);
 
+
         // Apply filter to lowValueInvoices
         List<Invoice> lowValueInvoices = filter.lowValueInvoices();
+        System.out.println(lowValueInvoices);
 
         // Check that lowValueInvoices is not null and all values are less than 100
         assertNotNull(lowValueInvoices);
